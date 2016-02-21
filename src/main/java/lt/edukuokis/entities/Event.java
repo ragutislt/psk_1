@@ -36,6 +36,12 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Event.findByOptLockVersion", query = "SELECT e FROM Event e WHERE e.optLockVersion = :optLockVersion")})
 public class Event implements Serializable {
 
+    @JoinTable(name = "EVENT_CATEGORY", joinColumns = {
+        @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")})
+    @ManyToMany
+    private List<Category> categoryList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -124,6 +130,14 @@ public class Event implements Serializable {
     @Override
     public String toString() {
         return "lt.edukuokis.entities.Event[ id=" + id + " ]";
+    }
+
+    public List<Category> getCategoryList() {
+        return categoryList;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
     
 }
