@@ -19,12 +19,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
  *
- * @author Daniele
+ * @author Aurimas Dainius
  */
 @Entity
 @Table(name = "CUSTOMER")
@@ -43,24 +42,19 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    
-    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Netinkamas el. pašto adreso formatas!")//if the field contains email address consider using this annotation to enforce field validation
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 100)
     @Column(name = "EMAIL")
     private String email;
-    
     @Size(max = 20)
     @Column(name = "FIRST_NAME")
     private String firstName;
-    
     @Size(max = 20)
     @Column(name = "LAST_NAME")
     private String lastName;
-    
     @Version
     @Column(name = "OPT_LOCK_VERSION")
     private Integer optLockVersion;
-    
     @ManyToMany(mappedBy = "customerList")
     private List<Event> eventList;
 
@@ -122,7 +116,7 @@ public class Customer implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 59 * hash + Objects.hashCode(this.email);
+        hash = 89 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -143,6 +137,8 @@ public class Customer implements Serializable {
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {

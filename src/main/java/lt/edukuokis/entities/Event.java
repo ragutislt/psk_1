@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,7 +26,7 @@ import javax.validation.constraints.Size;
 
 /**
  *
- * @author Daniele
+ * @author Aurimas Dainius
  */
 @Entity
 @Table(name = "EVENT")
@@ -36,12 +37,6 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Event.findByOptLockVersion", query = "SELECT e FROM Event e WHERE e.optLockVersion = :optLockVersion")})
 public class Event implements Serializable {
 
-    @JoinTable(name = "EVENT_CATEGORY", joinColumns = {
-        @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
-        @JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")})
-    @ManyToMany
-    private List<Category> categoryList;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,7 +46,6 @@ public class Event implements Serializable {
     @Size(max = 300)
     @Column(name = "TITLE")
     private String title;
-    
     @Version
     @Column(name = "OPT_LOCK_VERSION")
     private Integer optLockVersion;
@@ -60,6 +54,9 @@ public class Event implements Serializable {
         @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID")})
     @ManyToMany
     private List<Customer> customerList;
+    @JoinColumn(name = "CATEGORY", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Category category;
 
     public Event() {
     }
@@ -100,10 +97,18 @@ public class Event implements Serializable {
         this.customerList = customerList;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 41 * hash + Objects.hashCode(this.title);
+        int hash = 3;
+        hash = 73 * hash + Objects.hashCode(this.title);
         return hash;
     }
 
@@ -125,19 +130,11 @@ public class Event implements Serializable {
         return true;
     }
 
-
+    
 
     @Override
     public String toString() {
         return "lt.edukuokis.entities.Event[ id=" + id + " ]";
-    }
-
-    public List<Category> getCategoryList() {
-        return categoryList;
-    }
-
-    public void setCategoryList(List<Category> categoryList) {
-        this.categoryList = categoryList;
     }
     
 }
