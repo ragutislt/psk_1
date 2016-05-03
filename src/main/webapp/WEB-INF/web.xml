@@ -23,7 +23,7 @@
     </welcome-file-list>
     
     <data-source>
-        <name>java:app/env/Edukuokis</name>
+        <name>Edukuokis</name>
         <class-name>org.apache.derby.jdbc.ClientXADataSource</class-name>
         <server-name>localhost</server-name>
         <port-number>1527</port-number>
