@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      >
+    <h:head>
+        <title>Renginio kūrimas</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid cellpadding="5" style="width:100%;">
+                <b:inputText placeholder="Renginio pavadinimas" 
+                             label="Pavadinimas:" renderLabel="true" required="true" 
+                             requiredMessage="Pavadinimas yra būtinas" value="#{createEventBean.eventName}">
+                </b:inputText>
+
+                <b:inputText type="password" placeholder="Jūsų slaptažodis" 
+                             label="Slaptažodis:" renderLabel="true" required="true" 
+                             requiredMessage="Slaptažodis būtinas" value="#{userContainer.password}">
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="fa-key"/>
+                    </f:facet>
+                </b:inputText>
+
+                <b:button outcome="#{userContainer.login()}" value="Prisijungti" look='primary' 
+                          style='margin-top:20px;' iconAwesome="sign-in">  
+                </b:button>
+            </h:panelGrid>
+        </h:form>
+    </h:body>
+</html>
