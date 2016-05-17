@@ -2,23 +2,43 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui"
+      >
     <h:head>
-        <title>Facelet Title</title>
+        <title>Edukuokis</title>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+<!--        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
 
-        <!-- Optional theme -->
+         Optional theme 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+         Latest compiled and minified JavaScript 
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>-->
     </h:head>
     <h:body>
         <div class="container">
-            <h1>Hello from Facelets</h1>
-            <hr/>
-            <p>#{firstBean.ShowEvents()}</p>
+            <h1>Mūsų renginiai</h1>
+
+            <b:dataTable value="#{getEventBean.events}" var="event">
+                <b:column>
+                    <f:facet name="header">
+                        <h:outputText value="Pavadinimas" />
+                    </f:facet>
+                    <h:outputText value="#{event.title}" />
+                </b:column>
+
+                <b:column>
+                    <f:facet name="header">
+                        <h:outputText value="Kategorija"/>
+                    </f:facet>
+                    <h:outputText value="#{event.category.name}" />
+                </b:column>
+            </b:dataTable>
+
+            <h:messages style="color: red" />
+
+            <h:button value="Kurti naują renginį" outcome="create-event.xhtml" />
         </div>
     </h:body>
 </html>
