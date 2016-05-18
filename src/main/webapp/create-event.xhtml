@@ -15,25 +15,25 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </h:head>
     <h:body>
-        <h:form>
-            <h:panelGrid cellpadding="5" style="width:100%;">
-                <b:inputText placeholder="Renginio pavadinimas" 
-                             label="Pavadinimas:" renderLabel="true" required="true" 
-                             requiredMessage="Pavadinimas yra būtinas" value="#{createEventBean.eventName}">
-                </b:inputText>
+        <b:container>
+            <h:form>
+                <h:panelGrid cellpadding="5" style="width:100%;">
+                    <b:inputText placeholder="Renginio pavadinimas" 
+                                 label="Pavadinimas:" renderLabel="true" required="true" 
+                                 requiredMessage="Pavadinimas yra būtinas" value="#{createEventBean.eventName}">
+                    </b:inputText>
 
-                <b:inputText type="password" placeholder="Jūsų slaptažodis" 
-                             label="Slaptažodis:" renderLabel="true" required="true" 
-                             requiredMessage="Slaptažodis būtinas" value="#{userContainer.password}">
-                    <f:facet name="prepend">
-                        <b:iconAwesome name="fa-key"/>
-                    </f:facet>
-                </b:inputText>
+                    <h:outputLabel value="Pasirinkite renginio kategoriją:" for="categoryID" />
+                    <b:selectOneMenu value="#{createEventBean.category}" id="categoryID" >
+                        <f:selectItems value="#{semaphoreBean.colors}" var="c" itemValue="#{c}" itemLabel="#{c}"/>
+                    </b:selectOneMenu>
+                    <h:message for="categoryID"/>
 
-                <b:button outcome="#{userContainer.login()}" value="Prisijungti" look='primary' 
-                          style='margin-top:20px;' iconAwesome="sign-in">  
-                </b:button>
-            </h:panelGrid>
-        </h:form>
+                    <b:commandButton action="#{createEventBean.createEvent()}" value="Sukurti" look='primary' 
+                                     style='margin-top:20px;'>  
+                    </b:commandButton>
+                </h:panelGrid>
+            </h:form>
+        </b:container>
     </h:body>
 </html>
