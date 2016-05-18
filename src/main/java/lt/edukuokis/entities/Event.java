@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,7 +53,7 @@ public class Event implements Serializable {
     @JoinTable(name = "CUSTOMER_EVENT", joinColumns = {
         @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "CUSTOMER_ID", referencedColumnName = "ID")})
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     private List<Customer> customerList;
     @JoinColumn(name = "CATEGORY", referencedColumnName = "ID")
     @ManyToOne(optional = false)

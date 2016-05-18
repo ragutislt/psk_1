@@ -34,25 +34,33 @@
 
             </b:row>
 
+            <hr/>
+
             <b:row>
                 <b:button value="Kurti naują renginį" outcome="create-event.xhtml" />
             </b:row>
 
+            <hr/>
+
             <b:row>
+                <h4>Registruotis į renginį</h4>
+
                 <h:form id="registerToEventForm">
-                    <b:panelGrid columns="12" style="width:100%;">
+                    <b:panelGrid columns="12">
 
                         <h:outputLabel value="Pasirinkite renginį:" for="eventID" />
+
                         <b:selectOneMenu value="#{registerToEvent.event}" id="eventID" >
-                            <f:selectItems value="#{getEvent.events}" var="event" itemValue="#{event.title}" itemLabel="#{event.title}"/>
+                            <f:selectItems value="#{getEvent.events}" var="event" itemValue="#{event}" itemLabel="#{event.title}"/>
                         </b:selectOneMenu>
+
                         <h:message for="eventID"/>
 
-                        <b:commandButton action="#{registerToEvent.register()}" value="Sukurti" look='primary' 
-                                         style='margin-top:20px;' ajax="true" update="@next">  
-                        </b:commandButton>
+                        <b:commandButton action="#{registerToEvent.register()}" value="Registruotis" look='primary' 
+                                         style='margin-top:20px;' ajax="true" update="@next"
+                                         />  
 
-                        <b:well id="registerToEventMessages" >
+                        <b:well id="registerToEventMessages" style="margin-top:25px;">
                             <p>#{registerToEvent.message}</p>
                         </b:well>
                     </b:panelGrid>

@@ -1,6 +1,5 @@
 package lt.edukuokis.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
@@ -30,6 +29,7 @@ public class CreateEvent {
     @PostConstruct
     private void init() {
         categories = categoryService.getCategories();
+        //categories = new ArrayList<Category>();
     }
 
     public void createEvent() {

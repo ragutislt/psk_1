@@ -1,25 +1,41 @@
 package lt.edukuokis.beans;
 
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
+import lt.edukuokis.entities.Customer;
 import lt.edukuokis.entities.Event;
+import lt.edukuokis.services.CustomerService;
+import lt.edukuokis.services.EventService;
 
 /**
  *
  * @author Aurimas Dainius
  */
 @Named
-@Stateless
+@RequestScoped
 public class RegisterToEvent {
 
-    private Event event;
+    private Event event = new Event();
     private String message;
 
-    public String register() {
+    @Inject
+    private CustomerService customerService;
 
-        message = "Jūs buvote sėkmingai užregistruotas į renginį '" + event.getTitle() + "'";
+    @Inject
+    private EventService eventService;
 
-        return null;
+    public void register() {
+
+        Customer customer = customerService.getCurrentCustomer();
+
+        // reiktu sugalvoti dar viena dalyka, kad su duombaze interactintu
+        //customerService.registerToEvent(customer, event);
+        if (eventService.addCustomerToEvent(event, customer) == -1) {
+            message = "Įvyko klaida registruojantis į šį renginį!";
+        } else {
+            message = "Jūs buvote sėkmingai užregistruotas į renginį '" + event.getTitle() + "'";
+        }
     }
 
     public Event getEvent() {

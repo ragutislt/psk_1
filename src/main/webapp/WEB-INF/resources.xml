@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
-  <Resource id="Edukuokis" type="javax.sql.DataSource">#Thu Feb 18 21:46:00 EET 2016
-jdbcDriver=org.apache.derby.jdbc.ClientDriver
-password=samsung
-userName=ragutislt
-jdbcUrl=jdbc\:derby\://localhost\:1527/edukuokisDB
-</Resource>
+    <Resource id="Edukuokis" type="javax.sql.DataSource">#Thu Feb 18 21:46:00 EET 2016
+        jdbcDriver=org.apache.derby.jdbc.ClientDriver
+        password=samsung
+        userName=ragutislt
+        jdbcUrl=jdbc\:derby\://localhost\:1527/edukuokisDB
+    </Resource>
 </resources>

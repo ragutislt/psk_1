@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -55,7 +56,7 @@ public class Customer implements Serializable {
     @Version
     @Column(name = "OPT_LOCK_VERSION")
     private Integer optLockVersion;
-    @ManyToMany(mappedBy = "customerList")
+    @ManyToMany(mappedBy = "customerList", cascade = CascadeType.MERGE)
     private List<Event> eventList;
 
     public Customer() {

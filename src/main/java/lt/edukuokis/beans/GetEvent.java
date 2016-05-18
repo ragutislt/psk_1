@@ -4,7 +4,6 @@ import lt.edukuokis.entities.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,9 +17,6 @@ public class GetEvent {
     private EntityManager em;
     
     private List<Event> events = new ArrayList<>();
-    
-    @Inject
-    private CreateEvent createEventBean;
 
     public List<Event> getEvents() {
         Query allEvents = em.createNamedQuery("Event.findAll");
