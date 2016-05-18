@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.inject.Named;
 import lt.edukuokis.entities.Category;
 import lt.edukuokis.entities.Event;
+import lt.edukuokis.services.CategoryService;
 
 /**
  *
@@ -14,21 +16,22 @@ import lt.edukuokis.entities.Event;
  */
 @Named
 @Stateless
-public class CreateEventBean {
+public class CreateEvent {
 
     private Event event;
     private String eventName;
     private String category;
 
     List<Category> categories;
-    
+
+    @Inject
+    private CategoryService categoryService;
+
     @PostConstruct
     private void init() {
-        categories = new ArrayList<>();
-        
-        
+        categories = categoryService.getCategories();
     }
-    
+
     public void createEvent() {
 
     }

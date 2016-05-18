@@ -20,16 +20,16 @@ and open the template in the editor.
                 <h:panelGrid cellpadding="5" style="width:100%;">
                     <b:inputText placeholder="Renginio pavadinimas" 
                                  label="Pavadinimas:" renderLabel="true" required="true" 
-                                 requiredMessage="Pavadinimas yra būtinas" value="#{createEventBean.eventName}">
+                                 requiredMessage="Pavadinimas yra būtinas" value="#{createEvent.eventName}">
                     </b:inputText>
 
                     <h:outputLabel value="Pasirinkite renginio kategoriją:" for="categoryID" />
-                    <b:selectOneMenu value="#{createEventBean.category}" id="categoryID" >
+                    <b:selectOneMenu value="#{createEvent.category}" id="categoryID" >
                         <f:selectItems value="#{semaphoreBean.colors}" var="c" itemValue="#{c}" itemLabel="#{c}"/>
                     </b:selectOneMenu>
                     <h:message for="categoryID"/>
 
-                    <b:commandButton action="#{createEventBean.createEvent()}" value="Sukurti" look='primary' 
+                    <b:commandButton action="#{createEvent.createEvent()}" value="Sukurti" look='primary' 
                                      style='margin-top:20px;'>  
                     </b:commandButton>
                 </h:panelGrid>

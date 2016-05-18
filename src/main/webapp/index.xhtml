@@ -10,29 +10,56 @@
         <title>Edukuokis</title>
     </h:head>
     <h:body>
-        <div class="container">
-            <h1>Mūsų renginiai</h1>
+        <b:container>
+            <b:row>
+                <h1>Mūsų renginiai</h1>
 
-            <b:dataTable value="#{getEventBean.events}" var="event">
-                <b:column>
-                    <f:facet name="header">
-                        <h:outputText value="Pavadinimas" />
-                    </f:facet>
-                    <h:outputText value="#{event.title}" />
-                </b:column>
+                <b:dataTable value="#{getEvent.events}" var="event">
+                    <b:column>
+                        <f:facet name="header">
+                            <h:outputText value="Pavadinimas" />
+                        </f:facet>
+                        <h:outputText value="#{event.title}" />
+                    </b:column>
 
-                <b:column>
-                    <f:facet name="header">
-                        <h:outputText value="Kategorija"/>
-                    </f:facet>
-                    <h:outputText value="#{event.category.name}" />
-                </b:column>
-            </b:dataTable>
+                    <b:column>
+                        <f:facet name="header">
+                            <h:outputText value="Kategorija"/>
+                        </f:facet>
+                        <h:outputText value="#{event.category.name}" />
+                    </b:column>
+                </b:dataTable>
 
-            <h:messages style="color: red" />
+                <h:messages style="color: red" globalOnly="true"/>
 
-            <h:button value="Kurti naują renginį" outcome="create-event.xhtml" />
-        </div>
+            </b:row>
+
+            <b:row>
+                <b:button value="Kurti naują renginį" outcome="create-event.xhtml" />
+            </b:row>
+
+            <b:row>
+                <h:form id="registerToEventForm">
+                    <b:panelGrid columns="12" style="width:100%;">
+
+                        <h:outputLabel value="Pasirinkite renginį:" for="eventID" />
+                        <b:selectOneMenu value="#{registerToEvent.event}" id="eventID" >
+                            <f:selectItems value="#{getEvent.events}" var="event" itemValue="#{event.title}" itemLabel="#{event.title}"/>
+                        </b:selectOneMenu>
+                        <h:message for="eventID"/>
+
+                        <b:commandButton action="#{registerToEvent.register()}" value="Sukurti" look='primary' 
+                                         style='margin-top:20px;' ajax="true" update="@next">  
+                        </b:commandButton>
+
+                        <b:well id="registerToEventMessages" >
+                            <p>#{registerToEvent.message}</p>
+                        </b:well>
+                    </b:panelGrid>
+                </h:form>
+            </b:row>
+
+        </b:container>
     </h:body>
 </html>
 
